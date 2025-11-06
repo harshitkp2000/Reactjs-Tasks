@@ -3,6 +3,25 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react"; // lightweight icon
 
+const ShimmerCard = () => {
+  return (
+    <div className="w-full max-w-4xl bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl p-8 flex flex-col md:flex-row gap-8 items-center animate-pulse">
+      <div className="w-72 h-80 bg-gray-800 rounded-xl" />
+
+      <div className="flex-1 space-y-4 w-full">
+        <div className="h-6 bg-gray-800 rounded w-3/4" />
+        <div className="h-4 bg-gray-800 rounded w-1/3" />
+        <div className="h-5 bg-gray-800 rounded w-1/4" />
+        <div className="h-20 bg-gray-800 rounded w-full" />
+        <div className="flex gap-4">
+          <div className="h-5 bg-gray-800 rounded w-16" />
+          <div className="h-5 bg-gray-800 rounded w-24" />
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ProductInfo = () => {
   const [productInfo, setProductInfo] = useState(null);
   const { id } = useParams();
@@ -24,25 +43,6 @@ const ProductInfo = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const ShimmerCard = () => {
-    return (
-      <div className="w-full max-w-4xl bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl p-8 flex flex-col md:flex-row gap-8 items-center animate-pulse">
-        <div className="w-72 h-80 bg-gray-800 rounded-xl" />
-
-        <div className="flex-1 space-y-4 w-full">
-          <div className="h-6 bg-gray-800 rounded w-3/4" />
-          <div className="h-4 bg-gray-800 rounded w-1/3" />
-          <div className="h-5 bg-gray-800 rounded w-1/4" />
-          <div className="h-20 bg-gray-800 rounded w-full" />
-          <div className="flex gap-4">
-            <div className="h-5 bg-gray-800 rounded w-16" />
-            <div className="h-5 bg-gray-800 rounded w-24" />
-          </div>
-        </div>
-      </div>
-    );
   };
 
   return (
