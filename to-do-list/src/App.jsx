@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import './App.css'
-import AddTask from './Components/AddTask';
+import AddTas from './Components/AddTask';
 import DisplayTask from './Components/DisplayTask';
 
 function App() {
@@ -54,7 +54,7 @@ const handleAdd = () =>{
     <>
    <div className="flex flex-col items-center justify-center">
   <h1 className="text-3xl font-bold text-gray-800 mb-4">To-Do List</h1>
-     <AddTask
+     <AddTas
         value={value}
         setValue={setValue}
         handleAdd={handleAdd}
