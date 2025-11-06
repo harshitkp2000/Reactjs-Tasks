@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import ProductCard from "./ProductCard";
+import ProductCard from "../Component/ProductCard";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 

@@ -1,14 +1,14 @@
 import "./App.css";
-import Headers from "./Components/Headers";
+import Headers from "./Pages/Headers";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // import your page components
-import Home from "./Components/Home";
-import About from "./Components/About";
-import Contact from "./Components/Contact";
-import Products from "./Components/Products";
-import ProductInfo from "./Components/ProductInfo";
-import Cart from "./Components/Cart";
+import Home from "./Pages/Home";
+import About from "./Pages/About";
+import Contact from "./Pages/Contact";
+import Products from "./Pages/Products";
+import ProductInfo from "./Pages/ProductInfo";
+import Cart from "./Pages/Cart";
 
 function App() {
   return (

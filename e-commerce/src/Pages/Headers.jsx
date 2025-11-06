@@ -5,7 +5,7 @@ const Headers = () => {
   return (
     <div className="flex justify-between items-center bg-gray-900 text-gray-100 shadow-md px-8 py-4 border-b border-gray-700 sticky top-0 z-10">
       <div className="text-2xl font-extrabold text-blue-400 tracking-wide flex items-center gap-2">
-        <ShoppingBag size={32} className="text-blue-400" />
+        <ShoppingBag size={32} className="text-blue-400 cursor-pointer" />
       </div>
 
       <ul className="flex gap-6 text-gray-300 font-medium">
