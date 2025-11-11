@@ -22,7 +22,6 @@ const Headers = () => {
     setLengthOfCart(cartLength);
   }, [cartLength]);
 
-  // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -35,7 +34,6 @@ const Headers = () => {
 
   return (
     <div className="flex justify-between items-center bg-gray-900 text-gray-100 shadow-md px-8 py-4 border-b border-gray-700 sticky top-0 z-10">
-      {/* Logo */}
       <div
         className="text-2xl font-extrabold text-blue-400 tracking-wide flex items-center gap-2 cursor-pointer"
         onClick={() => navigate("/")}
@@ -44,7 +42,6 @@ const Headers = () => {
         <span className="hidden sm:inline">ShopEase</span>
       </div>
 
-      {/* Navbar Links */}
       <ul className="flex gap-6 text-gray-300 font-medium">
         <li>
           <Link
@@ -80,13 +77,11 @@ const Headers = () => {
         </li>
       </ul>
 
-      {/* Icons */}
       <div className="flex items-center gap-5 text-gray-300 relative">
         <button className="hover:text-blue-400 transition-colors duration-200">
           <Bell size={22} />
         </button>
 
-        {/* Cart Icon */}
         <Link
           to="/cart"
           className="relative hover:text-blue-400 transition-colors duration-200"
@@ -99,7 +94,6 @@ const Headers = () => {
           )}
         </Link>
 
-        {/* User Menu */}
         <div ref={menuRef} className="relative">
           <button
             onClick={() => setShowMenu(!showMenu)}
