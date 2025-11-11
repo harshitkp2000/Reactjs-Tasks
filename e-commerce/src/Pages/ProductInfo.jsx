@@ -1,7 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react"; // lightweight icon
+import { ArrowLeft, ShoppingCart } from "lucide-react";
+import { getProductsByCategory, getProductsById } from "../api/api";
+import ProductCard from "../Component/ProductCard";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../Redux/Slices/CartSlice";
+import { toast } from "react-toastify";
 
 const ShimmerCard = () => {
   return (
@@ -24,7 +29,9 @@ const ShimmerCard = () => {
 
 const ProductInfo = () => {
   const [productInfo, setProductInfo] = useState(null);
-  const { id } = useParams();
+  const dispatch = useDispatch();
+  const { id, category } = useParams();
+  const [productsByCategory, setProductsByCategory] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -33,16 +40,16 @@ const ProductInfo = () => {
   }, []);
 
   const fetchProductInfo = async () => {
-    try {
-      const response = await axios.get(
-        `https://fakestoreapi.com/products/${id}`
-      );
-      setProductInfo(response.data);
-    } catch (err) {
-      console.error("Error fetching product info:", err);
-    } finally {
-      setLoading(false);
-    }
+    const response = await getProductsById(id);
+    const response2 = await getProductsByCategory(id, category);
+    setProductsByCategory(response2);
+    setProductInfo(response);
+    setLoading(false);
+  };
+
+  const addingToCart = () => {
+    dispatch(addToCart(productInfo));
+    toast.success("Product added to cart");
   };
 
   return (
@@ -64,7 +71,7 @@ const ProductInfo = () => {
             className="w-72 h-80 object-contain bg-gray-800 p-4 rounded-xl shadow-md"
           />
 
-          <div className="flex-1">
+          <div className="flex-1 flex flex-col h-full">
             <h3 className="text-2xl font-bold text-gray-100 mb-3">
               {productInfo.title}
             </h3>
@@ -79,12 +86,35 @@ const ProductInfo = () => {
             </p>
             <div className="flex items-center gap-3">
               <p className="text-yellow-400 font-medium text-lg">
-                ⭐ {productInfo.rating.rate}
+                ⭐ {productInfo.rate}
               </p>
               <p className="text-gray-400 text-sm">
-                ({productInfo.rating.count}+ reviews)
+                ({productInfo.count}+ reviews)
               </p>
             </div>
+            <div className="flex items-center gap-3 mt-auto ">
+              <button
+                className="w-full flex justify-center items-center gap-2 bg-blue-600 cursor-pointer hover:bg-blue-500 text-white font-medium py-2 rounded-lg transition-all duration-200 shadow-md hover:shadow-blue-500/30"
+                onClick={addingToCart}
+              >
+                <ShoppingCart size={20} />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {!loading && productsByCategory && (
+        <div className="py-8">
+          <h2 className="text-xl font-semibold mb-4 capitalize border-b border-gray-700 pb-2 text-gray-300">
+            Suggestion for you
+          </h2>
+          <div className="py-8 grid gap-6 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {productsByCategory.map((p) => (
+              <div key={p.id} className="cursor-pointer">
+                <ProductCard product={p} />
+              </div>
+            ))}
           </div>
         </div>
       )}
