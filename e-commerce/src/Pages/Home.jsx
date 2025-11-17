@@ -15,7 +15,7 @@ const Home = () => {
     setProducts(response);
   };
 
-  const categories = [...new Set(products.map((p) => p.category))];
+  const categories = [...new Set(products?.map((p) => p.category))];
 
   const handleExploreCategory = (category) => {
     navigate(`/product`);
@@ -76,7 +76,7 @@ const Home = () => {
         </h2>
 
         <div className="grid gap-8 grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
-          {products.slice(0, 8).map((p) => (
+          {products?.slice(0, 8)?.map((p) => (
             <div
               key={p.id}
               onClick={() => navigate(`/product/${p.category}/${p.id}`)}
